@@ -56,3 +56,38 @@ git commit -am "updated the steps for activity 1"
 ```
 git push origin main
 ```
+#### There is a concept/feature in GitHub to block direct PUSH to the protected branches and all changes should route via `Pull Request` and can be enabled for Administrators as well
+#### Branching & Pull Requests (Review)
+##### Working with branches
+1. Create new branch with latest version of current branch: `git branch feature-1`
+2. Switch to the new branch: `git switch feature-1`
+3. Check logs: `git log --oneline`
+```
+e6180c4 (HEAD -> feature-1, main) updated about protected branches
+c8e1f9f (origin/main, origin/HEAD) updated about protected branches
+9e415ae update with push command
+4398e3d updated the steps for activity 1
+be44b7d updated course topics
+a0187b6 Initial commit
+```
+4. Add some new changes and commit them
+5. Check logs in new branch: `git log --oneline`
+```
+e206107 (HEAD -> feature-1) updated about branches
+e6180c4 (main) updated about protected branches
+c8e1f9f (origin/main, origin/HEAD) updated about protected branches
+9e415ae update with push command
+4398e3d updated the steps for activity 1
+be44b7d updated course topics
+a0187b6 Initial commit
+```
+6. Check the logs in `main` branch: `git log --oneline main`, in output the latest commit is missing as it was being done in the new branch
+```
+e6180c4 (main) updated about protected branches
+c8e1f9f (origin/main, origin/HEAD) updated about protected branches
+9e415ae update with push command
+4398e3d updated the steps for activity 1
+be44b7d updated course topics
+a0187b6 Initial commit
+```
+7. PUSH changes feature-1 changes to the REMOTE: `git push origin feature-1`
