@@ -151,3 +151,15 @@ echo "host_key_checking = False" >> ansible.cfg
     "unreachable": true
 }
 ```
+##### In order to fix the above error for the local system update the inventory file as shown below and the run `ansible all -m ping` to test the connection
+```
+172.31.18.157 ansible_connection=local
+```
+##### for the external server, authentication (with password or password less is required).
+##### for password less authentication, add the `privete_key` path in the `ansible.cfg` to setup the connection with server as show below
+```
+[defaults]
+inventory = ~/ansible/inventory
+host_key_checking = False
+private_key_file = ~/ansible/kul.pem
+```
