@@ -123,3 +123,31 @@ a0187b6 Initial commit
 ## Ansible: Infrastructure Configuration Management
 1. Login to the server
 2. Change hostname: `sudo hostnamectl set-hostname kmayer && bash`
+##### Installing ansible on ubuntu:20.04
+1. `sudo apt-get update -y`
+2. `sudo apt-get install -y ansible`
+3. `ansible --version`
+4. `sudo ls -ltr /etc/ansible/`
+##### Setting up `inventory` and `ansible.cfg`
+1. `mkdir ansible && cd ansible`
+2. Get system private IP using: `hostname -i`, copy the first string like: `172.31.18.37`
+3. add the same in `inventory` file, create the file if doesn't exist
+4. Let's try to ping: `ansible all -m ping`
+```
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+```
+5. Create `ansible.cfg` in the current directory
+```
+touch ansible.cfg
+echo "[defaults]" >> ansible.cfg
+echo "inventory = ~/ansible/inventory" >> ansible.cfg
+echo "host_key_checking = False" >> ansible.cfg
+```
+6. `ansible all -m ping`
+```
+172.31.18.157 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: ubuntu@172.31.18.157: Permission denied (publickey).",
+    "unreachable": true
+}
+```
