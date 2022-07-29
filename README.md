@@ -163,3 +163,49 @@ inventory = ~/ansible/inventory
 host_key_checking = False
 private_key_file = ~/ansible/kul.pem
 ```
+##### Creating first playbook with the name `install_docker.yaml`
+```
+- name: Install Docker
+  hosts: all
+
+  become: yes
+
+  tasks:
+  - name: install dependency packages
+    package:
+      name:
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+      state: present
+      update_cache: yes
+```
+##### Runthe playbook using: `ansible-playbook install_docker.yaml`
+##### updated playbook with docker installation steps
+```
+- name: Install Docker
+  hosts: kul
+
+  become: yes
+
+  tasks:
+  - name: install dependency packages
+    package:
+      name:
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+      state: present
+      update_cache: yes
+  - name: install docker
+    package:
+      name: docker.io
+      state: present
+  - name: update owner for /var/run/docker.sock
+    file:
+      path: /var/run/docker.sock
+      state: file
+      owner: ubuntu
+```
