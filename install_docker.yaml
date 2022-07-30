@@ -1,0 +1,31 @@
+[ash]
+172.31.29.247 ansible_connection=local
+
+[users]
+172.31.25.191
+172.31.21.80
+ubuntu@ash:~/ansible$ cat install_docker.yaml
+- name: Install Docker
+  hosts: ash
+
+  become: yes
+
+  tasks:
+  - name: install dependency packages
+    package:
+      name:
+        - ca-certificates
+        - curl
+        - gnupg
+        - lsb-release
+      state: present
+      update_cache: yes
+  - name: install docker
+    package:
+      name: docker.io
+      state: present
+  - name: update owner for /var/run/docker.sock
+    file:
+      path: /var/run/docker.sock
+      state: file
+      owner: ubuntu

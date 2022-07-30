@@ -1,0 +1,6 @@
+[ash]
+172.31.29.247 ansible_connection=local
+
+[users]
+172.31.25.191
+172.31.21.80
